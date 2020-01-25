@@ -5,7 +5,7 @@ board = [' ' for i in range(10)]
 def insertLetter(letter, pos):
     board[pos] = letter
 
-def printBoard(board):
+def printBoard():
     print('   ||   ||')
     print(' ' + board[1] + ' || ' + board[2] + ' || ' + board[3])
     print('   ||   ||')
@@ -31,15 +31,47 @@ def isWinner(board_pos, letter):
 def spaceisFree(pos):
     return board[pos] == ' '
 
+def playerMove():
+    
+    flag = True
+
+    while flag:
+        letter = input(' Enter Position to insert your \'X\' : ') 
+        try:
+            letter = int(letter)
+            if 0 > letter > 9:
+                print('Please enter a valid position !!!')
+            if spaceisFree(letter):
+                insertLetter('X', letter)
+        except:
+            pass
+        break
+
 def isBoardfull(board):
-    pass
+    if board.count(' ') > 1:
+        return True
+    else:
+        return False
 
 def main():
     print('\n<====  Welcome to the Tic Tac Toe  ====>\n')
-    printBoard(board)
+    printBoard()
 
     while not(isBoardfull(board)):
-        break
+        if not(isWinner(board, 'O')):
+            playerMove()
+            printBoard()
+            break
+        else:
+            print("Sorry, \'O\' wins the game !")
+            break
+
+        if not(isWinner(board, 'X')):
+            playerMove()
+            printBoard()
+        else:
+            print("Sorry, \'X\' wins the game !")
+            break
 
     if isBoardfull(board):
         print(' Game Tied !!!! ')
