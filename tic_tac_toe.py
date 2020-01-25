@@ -18,7 +18,30 @@ def printBoard(board):
     print(' ' + board[7] + ' || ' + board[8] + ' || ' + board[9])
     print('   ||   ||')
 
+def isWinner(board_pos, letter):
+    return( board[1] == letter and board[2] == letter and board[3] == letter or
+        board[4] == letter and board[5] == letter and board[6] == letter or
+        board[7] == letter and board[8] == letter and board[9] == letter or
+        board[1] == letter and board[4] == letter and board[7] == letter or
+        board[2] == letter and board[5] == letter and board[8] == letter or
+        board[3] == letter and board[6] == letter and board[9] == letter or
+        board[1] == letter and board[5] == letter and board[9] == letter or
+        board[3] == letter and board[5] == letter and board[7] == letter )
+
+def spaceisFree(pos):
+    return board[pos] == ' '
+
+def isBoardfull(board):
+    pass
+
 def main():
+    print('\n<====  Welcome to the Tic Tac Toe  ====>\n')
     printBoard(board)
+
+    while not(isBoardfull(board)):
+        break
+
+    if isBoardfull(board):
+        print(' Game Tied !!!! ')
 
 main()
