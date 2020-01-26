@@ -1,7 +1,5 @@
 # Tic Tac Toe game with Python 
-import random
-
-board = [' ' for i in range(10)] 
+import random 
 
 def insertLetter(letter, pos):
     board[pos] = letter
@@ -37,27 +35,28 @@ def playerMove():
     flag = True
 
     while flag:
-        letter = input(' Enter Position to insert your \'X\' : ') 
         try:
+            letter = input(' Enter Position to insert your \'X\' : ') 
             letter = int(letter)
             if 0 < letter < 10:
                 if spaceisFree(letter):
                     flag = False
-                    insertLetter('X', letter)
+                    return letter
                 else:
                     print('That space is occupied !!')
             else:
                 print('Please enter a valid position !!!')
-
         except:
-            print(' Type a number You enterd:',letter)
+            print(' Type a number, You enterd:',letter)
 
 def isBoardfull(board):
     return board.count(' ') < 1
 
 def selectRandom(lst):
-    
-    return lst[random.randrange(1,len(lst))]
+    if len(lst) == 1:
+        return lst[0]
+    else:
+        return lst[random.randrange(1,len(lst))]
 
 
 def compMove():
@@ -110,7 +109,8 @@ def main():
 
     while not(isBoardfull(board)):
         if not(isWinner(board, 'O')):
-            playerMove()
+            move = playerMove()
+            insertLetter('X', move)
             printBoard(board)
         else:
             print("Sorry, \'O\' wins the game !")
@@ -121,6 +121,7 @@ def main():
             move = compMove()
             if move == 0:
                 print('Game Tied !!!!!')
+                break
             else:
                 insertLetter('O', move)
                 print('Computer placed an \'O\' at position {}'.format(move))
@@ -132,4 +133,10 @@ def main():
     if isBoardfull(board):
         print(' Game Tied !!!! ')
 
-main()
+while True:
+    prompt = input('do you want to play again ? (y/n): ')
+    if prompt.lower() == 'y' or prompt.lower() == 'yes':
+        board = [' ' for i in range(10)]
+        main()
+    else:
+        break
