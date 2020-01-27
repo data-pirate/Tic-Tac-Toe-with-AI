@@ -72,7 +72,13 @@ def compMove():
             cpy[i] = each #Checking if the player will win using next move , The computer will try to block that move
             if isWinner(cpy, each):
                 move = i
-                return move
+                return move # else if move can lead to a win !
+
+    # checking if the center is available
+
+    if 5 in available_places:
+        move = 5
+        return move
 
 # checking if the corners positions are available 
 
@@ -82,12 +88,6 @@ def compMove():
             corners.append(i)
     if len(corners) > 0:
         move = selectRandom(corners)
-        return move
-
-# checking if the center is available
-
-    if 5 in available_places:
-        move = 5
         return move
 
 # check if position 2, 4, 6 ,8 are available
